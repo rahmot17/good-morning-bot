@@ -1,0 +1,24 @@
+name: Good Morning Bot
+
+on:
+  schedule:
+    - cron: '0 1 * * *' # Everyday at 7 AM BD time (UTC+6)
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install requests pytz
+
+      - name: Run bot
+        run: python main.py
